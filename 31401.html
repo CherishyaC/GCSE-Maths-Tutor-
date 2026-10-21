@@ -1,0 +1,1661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GCSE Maths Tutor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1b2a41">
+<meta name="description" content="Key Stage 3 maths practice (Years 7 to 9) that teaches with a ladder of hints before showing the answer.">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="GCSE Maths">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Kalam:wght@400;700&family=STIX+Two+Text:ital,wght@0,500;1,500&display=swap">
+<style>
+/* Layout: a maths exercise book. Squared paper behind, one question card on top,
+   teacher's pen notes (the hints) down a red-margined strip beside it. */
+:root {
+  --paper: #f5f8fb;
+  --grid: #dfe7ef;
+  --card: #ffffff;
+  --ink: #1b2a41;
+  --muted: #5a6a80;
+  --line: #c9d5e2;
+  --accent: #2b55c9;
+  --accent-ink: #ffffff;
+  --pen: #0d7466;
+  --margin: #e0675c;
+  --good: #1d7a3b;
+  --good-bg: #e3f4e8;
+  --bad: #b8352a;
+  --bad-bg: #fbe7e4;
+  --warn: #8a5a00;
+  --warn-bg: #fff2cc;
+
+  /* One colour per strand, so you always know which part of maths you're in */
+  --number: #2457d6;   --number-soft: #e4ecff;
+  --algebra: #7a3be0;  --algebra-soft: #efe6ff;
+  --ratio: #c4480b;    --ratio-soft: #ffeadc;
+  --geometry: #0b7a54; --geometry-soft: #ddf4e9;
+  --stats: #c01d68;    --stats-soft: #ffe2ef;
+  --on-strand: #ffffff;
+  /* Coloured pens for the three hints */
+  --hint1: #0d7466; --hint2: #2457d6; --hint3: #7a3be0;
+  --sun: #f2b100; --sun-ink: #3a2a00;
+  --scrim: rgba(12, 20, 34, 0.45);
+  --symbols: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20text-anchor%3D%22middle%22%3E%3Ctext%20x%3D%2218%22%20y%3D%2230%22%20fill%3D%22%23c4d3fb%22%20transform%3D%22rotate%280%2018%2030%29%22%3E%2B%3C%2Ftext%3E%3Ctext%20x%3D%2296%22%20y%3D%2222%22%20fill%3D%22%23dccafb%22%20transform%3D%22rotate%2815%2096%2022%29%22%3E%C3%97%3C%2Ftext%3E%3Ctext%20x%3D%2258%22%20y%3D%2270%22%20fill%3D%22%23fcd2b7%22%20transform%3D%22rotate%280%2058%2070%29%22%3E%C3%B7%3C%2Ftext%3E%3Ctext%20x%3D%22132%22%20y%3D%2266%22%20fill%3D%22%23bfe6d4%22%20transform%3D%22rotate%280%20132%2066%29%22%3E%3D%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22112%22%20fill%3D%22%23fbc8dc%22%20transform%3D%22rotate%28-10%2022%20112%29%22%3E%CF%80%3C%2Ftext%3E%3Ctext%20x%3D%22100%22%20y%3D%22124%22%20fill%3D%22%23c4d3fb%22%20transform%3D%22rotate%280%20100%20124%29%22%3E%E2%88%9A%3C%2Ftext%3E%3Ctext%20x%3D%22140%22%20y%3D%22150%22%20fill%3D%22%23dccafb%22%20transform%3D%22rotate%280%20140%20150%29%22%3E%E2%88%92%3C%2Ftext%3E%3Ctext%20x%3D%2262%22%20y%3D%22146%22%20fill%3D%22%23fcd2b7%22%20transform%3D%22rotate%288%2062%20146%29%22%3E%25%3C%2Ftext%3E%3Ctext%20x%3D%22138%22%20y%3D%2228%22%20fill%3D%22%23bfe6d4%22%20transform%3D%22rotate%280%20138%2028%29%22%3E%C2%B2%3C%2Ftext%3E%3C%2Fsvg%3E");
+
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-maths: "STIX Two Text", "Cambria Math", "Times New Roman", serif;
+  --font-pen: "Kalam", "Comic Sans MS", "Segoe Print", cursive;
+
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1621; --grid: #182434; --card: #142030; --ink: #e5ecf4; --muted: #95a5ba;
+    --line: #273950; --accent: #7d9fff; --accent-ink: #0b1220; --pen: #52d1b8; --margin: #e2857c;
+    --good: #6fd697; --good-bg: #153223; --bad: #ff8a7d; --bad-bg: #3a1a17; --warn: #f1c35a; --warn-bg: #3a2e0f;
+    --number: #7ea4ff; --number-soft: #18264a; --algebra: #b896ff; --algebra-soft: #261b47;
+    --ratio: #ff9f63; --ratio-soft: #3b2414; --geometry: #52d6a2; --geometry-soft: #0f3328;
+    --stats: #ff80b8; --stats-soft: #3d1629; --on-strand: #0b1220;
+    --hint1: #52d1b8; --hint2: #7ea4ff; --hint3: #b896ff; --sun: #ffcf4d; --sun-ink: #2a1f00;
+    --symbols: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20text-anchor%3D%22middle%22%3E%3Ctext%20x%3D%2218%22%20y%3D%2230%22%20fill%3D%22%2322325a%22%20transform%3D%22rotate%280%2018%2030%29%22%3E%2B%3C%2Ftext%3E%3Ctext%20x%3D%2296%22%20y%3D%2222%22%20fill%3D%22%2330245a%22%20transform%3D%22rotate%2815%2096%2022%29%22%3E%C3%97%3C%2Ftext%3E%3Ctext%20x%3D%2258%22%20y%3D%2270%22%20fill%3D%22%234a2e1a%22%20transform%3D%22rotate%280%2058%2070%29%22%3E%C3%B7%3C%2Ftext%3E%3Ctext%20x%3D%22132%22%20y%3D%2266%22%20fill%3D%22%2317402f%22%20transform%3D%22rotate%280%20132%2066%29%22%3E%3D%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22112%22%20fill%3D%22%234a1e33%22%20transform%3D%22rotate%28-10%2022%20112%29%22%3E%CF%80%3C%2Ftext%3E%3Ctext%20x%3D%22100%22%20y%3D%22124%22%20fill%3D%22%2322325a%22%20transform%3D%22rotate%280%20100%20124%29%22%3E%E2%88%9A%3C%2Ftext%3E%3Ctext%20x%3D%22140%22%20y%3D%22150%22%20fill%3D%22%2330245a%22%20transform%3D%22rotate%280%20140%20150%29%22%3E%E2%88%92%3C%2Ftext%3E%3Ctext%20x%3D%2262%22%20y%3D%22146%22%20fill%3D%22%234a2e1a%22%20transform%3D%22rotate%288%2062%20146%29%22%3E%25%3C%2Ftext%3E%3Ctext%20x%3D%22138%22%20y%3D%2228%22%20fill%3D%22%2317402f%22%20transform%3D%22rotate%280%20138%2028%29%22%3E%C2%B2%3C%2Ftext%3E%3C%2Fsvg%3E");
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1621; --grid: #182434; --card: #142030; --ink: #e5ecf4; --muted: #95a5ba;
+  --line: #273950; --accent: #7d9fff; --accent-ink: #0b1220; --pen: #52d1b8; --margin: #e2857c;
+  --good: #6fd697; --good-bg: #153223; --bad: #ff8a7d; --bad-bg: #3a1a17; --warn: #f1c35a; --warn-bg: #3a2e0f;
+  --number: #7ea4ff; --number-soft: #18264a; --algebra: #b896ff; --algebra-soft: #261b47;
+  --ratio: #ff9f63; --ratio-soft: #3b2414; --geometry: #52d6a2; --geometry-soft: #0f3328;
+  --stats: #ff80b8; --stats-soft: #3d1629; --on-strand: #0b1220;
+  --hint1: #52d1b8; --hint2: #7ea4ff; --hint3: #b896ff; --sun: #ffcf4d; --sun-ink: #2a1f00;
+  --symbols: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2226%22%20font-weight%3D%22700%22%20text-anchor%3D%22middle%22%3E%3Ctext%20x%3D%2218%22%20y%3D%2230%22%20fill%3D%22%2322325a%22%20transform%3D%22rotate%280%2018%2030%29%22%3E%2B%3C%2Ftext%3E%3Ctext%20x%3D%2296%22%20y%3D%2222%22%20fill%3D%22%2330245a%22%20transform%3D%22rotate%2815%2096%2022%29%22%3E%C3%97%3C%2Ftext%3E%3Ctext%20x%3D%2258%22%20y%3D%2270%22%20fill%3D%22%234a2e1a%22%20transform%3D%22rotate%280%2058%2070%29%22%3E%C3%B7%3C%2Ftext%3E%3Ctext%20x%3D%22132%22%20y%3D%2266%22%20fill%3D%22%2317402f%22%20transform%3D%22rotate%280%20132%2066%29%22%3E%3D%3C%2Ftext%3E%3Ctext%20x%3D%2222%22%20y%3D%22112%22%20fill%3D%22%234a1e33%22%20transform%3D%22rotate%28-10%2022%20112%29%22%3E%CF%80%3C%2Ftext%3E%3Ctext%20x%3D%22100%22%20y%3D%22124%22%20fill%3D%22%2322325a%22%20transform%3D%22rotate%280%20100%20124%29%22%3E%E2%88%9A%3C%2Ftext%3E%3Ctext%20x%3D%22140%22%20y%3D%22150%22%20fill%3D%22%2330245a%22%20transform%3D%22rotate%280%20140%20150%29%22%3E%E2%88%92%3C%2Ftext%3E%3Ctext%20x%3D%2262%22%20y%3D%22146%22%20fill%3D%22%234a2e1a%22%20transform%3D%22rotate%288%2062%20146%29%22%3E%25%3C%2Ftext%3E%3Ctext%20x%3D%22138%22%20y%3D%2228%22%20fill%3D%22%2317402f%22%20transform%3D%22rotate%280%20138%2028%29%22%3E%C2%B2%3C%2Ftext%3E%3C%2Fsvg%3E");
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image: var(--bg-image);
+  background-size: var(--bg-size);
+  background-attachment: fixed;
+  color: var(--ink);
+  font: 17px/1.55 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-top: max(20px, env(safe-area-inset-top, 0px));
+  padding-bottom: 48px;
+}
+.wrap { max-width: 1200px; margin: 0 auto; display: grid; gap: 20px; }
+
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
+
+button, select, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ----- Header and tabs ----- */
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+header p { max-width: 46ch; }
+.tabs { display: flex; gap: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+.tabs button { border: 0; background: transparent; padding: 8px 16px; border-radius: 999px; font-weight: 700; color: var(--muted); }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+
+/* ----- Controls row ----- */
+.controls { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: end; }
+.group { display: grid; gap: 6px; }
+.type-tip { font-size: 0.9rem; color: var(--muted); margin-top: -8px; }
+.seg { display: inline-flex; border: 1.5px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--card); }
+.seg button { border: 0; background: transparent; padding: 8px 14px; font-weight: 700; color: var(--muted); }
+.seg button + button { border-left: 1.5px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+/* ----- Learn box ----- */
+details.learn { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; }
+details.learn summary { cursor: pointer; font-weight: 700; }
+details.learn[open] summary { margin-bottom: 10px; }
+.learn-body { display: grid; gap: 10px; max-width: 70ch; }
+.learn-body .eg { font-family: var(--font-maths); font-size: 1.1rem; background: var(--paper); border-radius: 6px; padding: 8px 12px; white-space: pre-line; }
+
+/* ----- Practice layout: question + hint strip ----- */
+.desk { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 760px) { .desk { grid-template-columns: minmax(0, 1fr); } }
+
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 22px; display: grid; gap: 16px; box-shadow: 0 1px 0 var(--line);
+}
+.qhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.badge { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; border: 1.5px solid currentColor; }
+.badge.foundation { color: var(--pen); }
+.badge.higher { color: var(--accent); }
+.prompt { font-family: var(--font-maths); font-size: clamp(1.5rem, 4.5vw, 2.1rem); line-height: 1.3; white-space: pre-wrap; overflow-wrap: anywhere; }
+.prompt.long { font-size: clamp(1.15rem, 3vw, 1.4rem); line-height: 1.5; max-width: 60ch; }
+
+.answer-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.answer-row input {
+  flex: 1 1 180px; min-width: 0; font-family: var(--font-maths); font-size: 1.35rem;
+  padding: 8px 12px; border: 2px solid var(--line); border-radius: 8px; background: var(--paper);
+}
+.answer-row input:focus { border-color: var(--accent); outline: none; }
+.keys { display: flex; flex-wrap: wrap; gap: 6px; }
+.keys button { font-family: var(--font-maths); font-size: 1.05rem; min-width: 42px; padding: 4px 10px; border: 1px solid var(--line); background: var(--paper); border-radius: 6px; }
+
+.btn { border: 0; border-radius: 8px; padding: 10px 18px; font-weight: 700; background: var(--accent); color: var(--accent-ink); }
+.btn.secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.btn.pen { background: transparent; color: var(--pen); border: 1.5px dashed var(--pen); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.feedback { padding: 10px 14px; border-radius: 8px; font-weight: 700; display: flex; gap: 10px; align-items: baseline; }
+.feedback.correct { background: var(--good-bg); color: var(--good); }
+.feedback.wrong { background: var(--bad-bg); color: var(--bad); }
+.feedback.almost, .feedback.invalid { background: var(--warn-bg); color: var(--warn); }
+.feedback .mark { font-family: var(--font-pen); font-size: 1.4rem; line-height: 1; }
+
+/* Hint strip: an exercise-book margin with the teacher's notes in pen */
+.strip {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 18px 18px 34px; position: relative; display: grid; gap: 14px;
+}
+.strip::before { content: ""; position: absolute; top: 0; bottom: 0; left: 22px; width: 2px; background: var(--margin); opacity: 0.7; }
+.ladder { display: flex; gap: 6px; align-items: center; }
+.rung { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font-weight: 700; font-size: 0.85rem; color: var(--muted); }
+.rung.used { border-color: var(--pen); background: var(--pen); color: var(--card); }
+.rung.solution { font-size: 1rem; }
+.rung.solution.used { border-color: var(--bad); background: var(--bad); }
+.ladder .bar { flex: 1; height: 2px; background: var(--line); min-width: 8px; }
+.notes { display: grid; gap: 12px; }
+.note { font-family: var(--font-pen); color: var(--pen); font-size: 1.15rem; line-height: 1.4; }
+.note b { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; display: block; color: var(--muted); }
+.solution { display: grid; gap: 4px; font-family: var(--font-maths); font-size: 1.1rem; border-top: 1px dashed var(--line); padding-top: 12px; }
+.solution .final { font-weight: 500; color: var(--bad); }
+.empty-note { color: var(--muted); font-style: italic; }
+
+.tally { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.95rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tally strong { color: var(--ink); }
+
+/* ----- Quiz ----- */
+.quiz-progress { height: 8px; background: var(--paper); border-radius: 999px; overflow: hidden; border: 1px solid var(--line); }
+.quiz-progress span { display: block; height: 100%; background: var(--accent); transition: width 0.25s ease; }
+.big-score { font-family: var(--font-display); font-size: 3rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+
+/* ----- Tables ----- */
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 0.95rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+td.num, th.num { text-align: right; }
+td.maths { font-family: var(--font-maths); white-space: pre-line; }
+tr.strand-row td { font-weight: 700; background: var(--paper); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.ok { color: var(--good); font-weight: 700; }
+.no { color: var(--bad); font-weight: 700; }
+
+.confirm { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 14px; border-radius: 8px; background: var(--bad-bg); color: var(--bad); font-weight: 700; }
+.toast { font-weight: 700; color: var(--good); }
+textarea.csv { width: 100%; min-height: 120px; font-family: ui-monospace, monospace; font-size: 0.8rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; color: var(--ink); padding: 8px; }
+
+footer { font-size: 0.9rem; color: var(--muted); }
+code { font-family: ui-monospace, monospace; background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+
+
+.install { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.install p { font-size: 0.9rem; color: var(--muted); max-width: 32ch; }
+.tabs svg { display: none; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Phones: an app-style tab bar along the bottom */
+@media (max-width: 760px) {
+  body { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  header p { display: none; }
+  h1 { font-size: 1.5rem; }
+  .tabs {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    border-radius: 0; border: 0; border-top: 1px solid var(--line);
+    justify-content: space-around; gap: 0;
+    padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+  }
+  .tabs button { flex: 1; display: grid; justify-items: center; gap: 2px; font-size: 0.75rem; padding: 6px 4px; border-radius: 12px; }
+  .tabs button[aria-selected="true"][role="tab"] { background: transparent; color: var(--strand); }
+  .tabs svg { display: block; }
+  .card { padding: 16px; }
+}
+
+/* ----- Strand colours ----- */
+:root, [data-strand="algebra"] { --strand: var(--algebra); --strand-soft: var(--algebra-soft); }
+[data-strand="number"] { --strand: var(--number); --strand-soft: var(--number-soft); }
+[data-strand="ratio"] { --strand: var(--ratio); --strand-soft: var(--ratio-soft); }
+[data-strand="geometry"] { --strand: var(--geometry); --strand-soft: var(--geometry-soft); }
+[data-strand="stats"] { --strand: var(--stats); --strand-soft: var(--stats-soft); }
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand svg { width: 44px; height: 44px; flex: none; border-radius: 11px; }
+.rainbow { display: flex; height: 6px; border-radius: 999px; overflow: hidden; }
+.rainbow span { flex: 1; }
+.rainbow span:nth-child(1) { background: var(--number); }
+.rainbow span:nth-child(2) { background: var(--algebra); }
+.rainbow span:nth-child(3) { background: var(--ratio); }
+.rainbow span:nth-child(4) { background: var(--geometry); }
+.rainbow span:nth-child(5) { background: var(--stats); }
+
+
+details.learn { border-left: 6px solid var(--strand); }
+details.learn { background: var(--strand-soft); }
+details.learn .eg { background: var(--card); }
+#q-card, #quiz-run { border-top: 6px solid var(--strand); }
+#q-topic, #quiz-count { color: var(--strand); }
+#q-card .btn:not(.secondary):not(.pen), #quiz-run .btn { background: var(--strand); color: var(--on-strand); }
+.answer-row input:focus { border-color: var(--strand); }
+.keys button { background: var(--strand-soft); border-color: transparent; color: var(--strand); font-weight: 700; }
+.quiz-progress span { background: var(--strand); }
+.big-score { color: var(--strand); }
+tr.strand-row td { background: var(--strand-soft); color: var(--strand); }
+.seg button[aria-pressed="true"] { background: var(--strand); color: var(--on-strand); }
+.tabs button[aria-selected="true"] { background: var(--strand); color: var(--on-strand); }
+
+/* The hint ladder: each hint in a different coloured pen */
+.rung.used.r1 { background: var(--hint1); border-color: var(--hint1); }
+.rung.used.r2 { background: var(--hint2); border-color: var(--hint2); }
+.rung.used.r3 { background: var(--hint3); border-color: var(--hint3); }
+.note.n1 { color: var(--hint1); }
+.note.n2 { color: var(--hint2); }
+.note.n3 { color: var(--hint3); }
+
+.streak { background: var(--sun); color: var(--sun-ink); border-radius: 999px; padding: 1px 10px; font-weight: 700; }
+.streak[hidden] { display: none; }
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+
+/* ----- Sidebar menu ----- */
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 20px; align-items: start; }
+.main { display: grid; gap: 20px; min-width: 0; }
+.sidebar {
+  position: sticky; top: max(16px, env(safe-area-inset-top, 0px));
+  max-height: calc(100vh - 32px); overflow-y: auto;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px; display: grid; gap: 12px; align-content: start; grid-auto-rows: max-content;
+}
+.side-head { display: flex; justify-content: space-between; align-items: center; }
+.side-collapse { display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--paper); color: var(--ink); }
+.side-collapse svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.side-collapse:hover { background: var(--strand-soft); color: var(--strand); }
+.side-close { display: none; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--paper); font-size: 1.5rem; line-height: 1; color: var(--ink); }
+.sidebar .seg { display: flex; }
+.sidebar .seg button { flex: 1; padding: 6px 0; }
+#strand-menu { display: grid; gap: 4px; }
+.strand-head {
+  width: 100%; display: flex; align-items: center; gap: 10px; border: 0; background: transparent;
+  padding: 9px 10px; border-radius: 8px; font-weight: 700; text-align: left; color: var(--ink);
+}
+.strand-head .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--strand); flex: none; }
+.strand-head .count { margin-left: auto; font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.strand-head svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s ease; }
+.strand-head:hover { background: var(--strand-soft); }
+.strand-head[aria-expanded="true"] { background: var(--strand-soft); color: var(--strand); }
+.strand-head[aria-expanded="true"] svg { transform: rotate(90deg); }
+.topic-list { list-style: none; margin: 2px 0 6px 15px; padding: 0 0 0 10px; display: grid; gap: 2px; border-left: 2px solid var(--strand-soft); }
+.topic-link {
+  width: 100%; display: flex; align-items: baseline; gap: 8px; border: 0; background: transparent;
+  text-align: left; padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 0.95rem;
+}
+.topic-link .year { margin-left: auto; font-size: 0.72rem; font-weight: 700; color: var(--strand); white-space: nowrap; }
+.topic-link:hover { background: var(--strand-soft); }
+.topic-link[aria-current="true"] { background: var(--strand); color: var(--on-strand); font-weight: 700; }
+.topic-link[aria-current="true"] .year { color: var(--on-strand); }
+
+.search { position: relative; }
+.search svg { position: absolute; left: 10px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; pointer-events: none; }
+.search input {
+  width: 100%; padding: 9px 34px 9px 36px; border: 1.5px solid var(--line); border-radius: 8px;
+  background: var(--paper); color: var(--ink);
+}
+.search input:focus { outline: none; border-color: var(--strand); box-shadow: 0 0 0 3px var(--strand-soft); }
+.search-key {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  font: 700 0.75rem ui-monospace, monospace; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; background: var(--card);
+}
+.search input:focus ~ .search-key, .search input:not(:placeholder-shown) ~ .search-key { display: none; }
+.search-status { font-size: 0.85rem; color: var(--muted); }
+.search-status:empty { display: none; }
+
+/* ----- Backgrounds ----- */
+/* Each option sets --bg-image and --bg-size. The page and the little preview buttons both use them. */
+:root, [data-bg="wash"] {
+  --bg-image:
+    radial-gradient(48rem 38rem at 0% 0%, color-mix(in srgb, var(--strand) 32%, transparent), transparent 70%),
+    radial-gradient(40rem 34rem at 100% 25%, color-mix(in srgb, var(--sun) 24%, transparent), transparent 70%),
+    radial-gradient(50rem 38rem at 30% 100%, color-mix(in srgb, var(--strand) 22%, transparent), transparent 70%);
+  --bg-size: 100% 100%;
+}
+[data-bg="symbols"] { --bg-image: var(--symbols); --bg-size: 160px 160px; }
+[data-bg="dots"] { --bg-image: radial-gradient(circle, color-mix(in srgb, var(--strand) 35%, var(--grid)) 1.6px, transparent 1.8px); --bg-size: 22px 22px; }
+[data-bg="squares"] { --bg-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); --bg-size: 22px 22px; }
+[data-bg="plain"] { --bg-image: none; --bg-size: auto; }
+/* Custom gradient: your two colours, softened by a veil of the page colour so text stays readable */
+:root { --g1: #f97316; --g2: #ec4899; --g-angle: 135deg; --g-veil: 55%; }
+[data-bg="gradient"] {
+  --grad-pure: linear-gradient(var(--g-angle), var(--g1), var(--g2));
+  --bg-image:
+    linear-gradient(color-mix(in srgb, var(--paper) var(--g-veil), transparent), color-mix(in srgb, var(--paper) var(--g-veil), transparent)),
+    var(--grad-pure);
+  --bg-size: 100% 100%;
+}
+.bg-swatch[data-bg="gradient"] { background-image: var(--grad-pure); background-size: 100% 100%; }
+
+.bg-picker { display: flex; flex-wrap: wrap; gap: 8px; }
+.bg-swatch {
+  width: 40px; height: 40px; border-radius: 10px; border: 2px solid var(--line); padding: 0;
+  background-color: var(--paper); background-image: var(--bg-image); background-size: var(--bg-size); background-position: center;
+}
+.bg-swatch[data-bg="wash"] { background-size: 300% 300%; background-position: 0 0; }
+.bg-swatch[data-bg="symbols"] { background-size: 64px 64px; }
+.bg-swatch[aria-pressed="true"] { border-color: var(--strand); box-shadow: 0 0 0 2px var(--strand-soft); }
+.bg-name { font-size: 0.85rem; color: var(--muted); }
+
+.grad-panel { display: grid; gap: 12px; padding: 12px; border-radius: 10px; background: var(--paper); border: 1px solid var(--line); }
+.grad-presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.grad-preset { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--card); box-shadow: 0 0 0 1.5px var(--line); padding: 0; }
+.grad-preset[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--strand); }
+.grad-colours { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.grad-colours label { font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.grad-colours input[type="color"] { width: 40px; height: 32px; padding: 0; border: 1.5px solid var(--line); border-radius: 8px; background: var(--card); cursor: pointer; }
+.grad-colours .btn { padding: 6px 12px; font-size: 0.85rem; }
+.grad-slider { display: grid; gap: 4px; font-size: 0.85rem; color: var(--muted); }
+.grad-slider > span { display: flex; justify-content: space-between; }
+.grad-slider input[type="range"] { width: 100%; accent-color: var(--strand); }
+.grad-warn { font-size: 0.85rem; color: var(--warn); background: var(--warn-bg); border-radius: 8px; padding: 6px 10px; }
+.grad-warn:empty { display: none; }
+.grad-panel > .btn { justify-self: start; padding: 7px 14px; font-size: 0.9rem; }
+.topic-link mark { background: var(--sun); color: var(--sun-ink); border-radius: 3px; padding: 0 1px; }
+
+.toolbar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 10px 16px; }
+.crumb { display: grid; gap: 2px; min-width: 0; }
+.crumb .label { color: var(--strand); }
+.crumb strong { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; line-height: 1.15; }
+.menu-btn { display: none; align-items: center; gap: 8px; border: 1.5px solid var(--line); background: var(--card); border-radius: 10px; padding: 8px 14px; font-weight: 700; color: var(--ink); }
+.menu-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
+.scrim { position: fixed; inset: 0; background: var(--scrim); z-index: 35; }
+
+@media (max-width: 960px) { .layout { grid-template-columns: 230px minmax(0, 1fr); } }
+
+/* On computers the whole sidebar can be hidden. The Topics button in the header brings it back. */
+@media (min-width: 761px) {
+  html[data-side="collapsed"] .layout { grid-template-columns: minmax(0, 1fr); }
+  html[data-side="collapsed"] .sidebar { display: none; }
+  html[data-side="collapsed"] .menu-btn { display: inline-flex; margin-left: auto; }
+}
+
+/* Phones: the sidebar becomes a drawer that slides in from the left */
+@media (max-width: 760px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .menu-btn { display: inline-flex; flex: none; }
+  header { align-items: center; }
+  header > div:first-child { flex: 1 1 0; min-width: 0; }
+  .install { flex-basis: 100%; }
+  .brand svg { width: 38px; height: 38px; }
+  .sidebar {
+    position: fixed; top: 0; bottom: 0; left: 0; z-index: 40;
+    width: min(86vw, 330px); max-height: none; border-radius: 0 16px 16px 0;
+    padding-top: max(16px, env(safe-area-inset-top, 0px));
+    padding-left: max(14px, env(safe-area-inset-left, 0px));
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-105%); visibility: hidden;
+    transition: transform 0.25s ease, visibility 0.25s;
+  }
+  .sidebar.open { transform: none; visibility: visible; box-shadow: 0 0 40px var(--scrim); }
+  .side-close { display: grid; }
+  .side-collapse { display: none; }
+  .search-key { display: none; }
+}
+
+/* ----- Home page ----- */
+.home { display: grid; gap: 22px; }
+.brand { cursor: pointer; }
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: 20px;
+  padding: 28px; border-radius: 18px; border: 1px solid var(--line);
+  background: linear-gradient(135deg, var(--strand-soft), var(--card) 65%);
+}
+.hero-text { display: grid; gap: 14px; }
+.hero-title { font-size: clamp(2.1rem, 6vw, 3.4rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+.hero-sub { max-width: 46ch; color: var(--muted); font-size: 1.05rem; }
+.hero .btn { padding: 12px 22px; font-size: 1.05rem; }
+.hero-go { background: var(--strand); color: var(--on-strand); }
+.hero-art { width: 100%; max-width: 230px; justify-self: center; }
+.hero-art .rail { stroke: var(--ink); stroke-width: 12; }
+.hero-art .rung1 { stroke: var(--hint1); stroke-width: 10; }
+.hero-art .rung2 { stroke: var(--hint2); stroke-width: 10; }
+.hero-art .rung3 { stroke: var(--hint3); stroke-width: 10; }
+.hero-art .rung4 { stroke: var(--bad); stroke-width: 10; }
+.hero-symbols text { font: 700 26px var(--font-maths); fill: var(--strand); opacity: 0.55; }
+
+.home-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.home-stats:empty { display: none; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 2px; }
+.stat b { font-family: var(--font-display); font-size: 2rem; line-height: 1.1; color: var(--strand); font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 0.9rem; }
+
+.home-section { display: grid; gap: 12px; }
+.strand-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.strand-card {
+  text-align: left; display: grid; gap: 10px; align-content: start;
+  background: var(--card); color: var(--ink); border: 1px solid var(--line); border-top: 6px solid var(--strand);
+  border-radius: var(--radius); padding: 16px; transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.strand-card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px color-mix(in srgb, var(--strand) 22%, transparent); }
+.strand-card .sym { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 14px; background: var(--strand-soft); color: var(--strand); font: 600 1.6rem var(--font-maths); }
+.strand-card strong { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; }
+.strand-card .meta { color: var(--muted); font-size: 0.9rem; }
+.meter { height: 8px; background: var(--strand-soft); border-radius: 999px; overflow: hidden; }
+.meter span { display: block; height: 100%; background: var(--strand); border-radius: 999px; }
+
+.how-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.how-steps li { display: grid; gap: 4px; align-content: start; }
+.how-steps li span:last-child { color: var(--muted); font-size: 0.92rem; }
+.how-rung { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: var(--card); margin-bottom: 4px; }
+.how-rung.r0 { background: var(--muted); }
+.how-rung.r1 { background: var(--hint1); }
+.how-rung.r2 { background: var(--hint2); }
+.how-rung.r3 { background: var(--hint3); }
+.how-rung.r4 { background: var(--bad); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding: 22px; }
+  .hero-art { display: none; }
+  .strand-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strand-card:last-child:nth-child(odd) { grid-column: span 2; }
+  .strand-card { padding: 14px; }
+  .strand-card .sym { width: 46px; height: 46px; font-size: 1.3rem; }
+  .tabs button { font-size: 0.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<div class="wrap">
+
+  <header>
+    <div style="display:grid;gap:6px">
+      <div class="brand" id="brand" role="link" tabindex="0" title="Home">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#1b2a41"/><g stroke-linecap="round"><line x1="176" y1="88" x2="176" y2="440" stroke="#f5f8fb" stroke-width="34"/><line x1="336" y1="88" x2="336" y2="440" stroke="#f5f8fb" stroke-width="34"/><line x1="176" y1="368" x2="336" y2="368" stroke="#52d1b8" stroke-width="30"/><line x1="176" y1="288" x2="336" y2="288" stroke="#7ea4ff" stroke-width="30"/><line x1="176" y1="208" x2="336" y2="208" stroke="#b896ff" stroke-width="30"/><line x1="176" y1="128" x2="336" y2="128" stroke="#e0675c" stroke-width="30"/></g></svg>
+        <h1>GCSE Maths Tutor</h1>
+      </div>
+      <p class="muted">Maths for Years 7 to 10, from Key Stage 3 into GCSE. Stuck? Climb the hint ladder one rung at a time. The answer only appears at the very top.</p>
+    </div>
+    <button class="menu-btn" id="menu-btn" type="button" aria-controls="sidebar" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Topics</button>
+    <div class="install" id="install" hidden>
+      <button class="btn" id="install-btn" type="button" hidden>Install app</button>
+      <p id="install-tip"></p>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" id="tab-home" aria-selected="true" data-view="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg>Home</button>
+      <button role="tab" id="tab-practise" aria-selected="false" data-view="practise"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4.5-1L19 8.5 15.5 5 5 15.5z"/><path d="M13.5 7l3.5 3.5"/></svg>Practise</button>
+      <button role="tab" id="tab-quiz" aria-selected="false" data-view="quiz"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 2.5h5"/></svg>Quiz</button>
+      <button role="tab" id="tab-progress" aria-selected="false" data-view="progress"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-8M12 20V5M19 20v-5"/></svg>My progress</button>
+    </nav>
+  </header>
+  <div class="rainbow" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="layout">
+  <!-- ================= SIDEBAR MENU ================= -->
+  <aside class="sidebar" id="sidebar" aria-label="Topic menu">
+    <div class="side-head">
+      <span class="label">Topics</span>
+      <button class="side-collapse" id="side-collapse" type="button" aria-label="Hide the topic menu" title="Hide the menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 7l-5 5 5 5M18 7l-5 5 5 5"/></svg></button>
+      <button class="side-close" id="side-close" type="button" aria-label="Close the menu">&times;</button>
+    </div>
+    <div class="seg" id="year-seg" aria-label="Year">
+      <button data-year="all" aria-pressed="true">All</button>
+      <button data-year="7" aria-pressed="false">Y7</button>
+      <button data-year="8" aria-pressed="false">Y8</button>
+      <button data-year="9" aria-pressed="false">Y9</button>
+      <button data-year="10" aria-pressed="false">Y10</button>
+    </div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" id="topic-search" placeholder="Search topics" aria-label="Search topics" autocomplete="off" spellcheck="false" enterkeyhint="go">
+      <kbd class="search-key" aria-hidden="true">/</kbd>
+    </div>
+    <p class="search-status" id="search-status" aria-live="polite"></p>
+    <nav id="strand-menu"></nav>
+    <div class="group bg-group">
+      <span class="label">Background</span>
+      <div class="bg-picker" id="bg-picker">
+        <button class="bg-swatch" type="button" data-bg="wash" title="Colour wash" aria-label="Colour wash background"></button>
+        <button class="bg-swatch" type="button" data-bg="symbols" title="Maths symbols" aria-label="Maths symbols background"></button>
+        <button class="bg-swatch" type="button" data-bg="dots" title="Dots" aria-label="Dots background"></button>
+        <button class="bg-swatch" type="button" data-bg="squares" title="Squared paper" aria-label="Squared paper background"></button>
+        <button class="bg-swatch" type="button" data-bg="plain" title="Plain" aria-label="Plain background"></button>
+        <button class="bg-swatch" type="button" data-bg="gradient" title="Custom gradient" aria-label="Custom gradient background"></button>
+      </div>
+      <span class="bg-name" id="bg-name"></span>
+      <div class="grad-panel" id="grad-panel" hidden>
+        <div class="grad-presets" id="grad-presets" role="group" aria-label="Gradient presets"></div>
+        <div class="grad-colours">
+          <label for="grad-c1">Colour 1 <input type="color" id="grad-c1" value="#f97316"></label>
+          <label for="grad-c2">Colour 2 <input type="color" id="grad-c2" value="#ec4899"></label>
+          <button class="btn secondary" id="grad-swap" type="button">Swap</button>
+        </div>
+        <label class="grad-slider" for="grad-angle"><span>Direction <output id="grad-angle-out" for="grad-angle">135°</output></span>
+          <input type="range" id="grad-angle" min="0" max="360" step="5" value="135"></label>
+        <label class="grad-slider" for="grad-strength"><span>Strength <output id="grad-strength-out" for="grad-strength">45%</output></span>
+          <input type="range" id="grad-strength" min="15" max="100" step="5" value="45"></label>
+        <p class="grad-warn" id="grad-warn" aria-live="polite"></p>
+        <button class="btn secondary" id="grad-random" type="button">Surprise me</button>
+      </div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <main class="main">
+
+  <!-- ================= HOME ================= -->
+  <section id="view-home" class="home">
+    <div class="hero">
+      <div class="hero-text">
+        <span class="label">Key Stage 3 &amp; GCSE · Years 7 to 10</span>
+        <h2 class="hero-title">Climb the ladder.<br>Crack the maths.</h2>
+        <p class="hero-sub"><span id="topic-count">48</span> topics, from negative numbers to trigonometry. Stuck? Take one hint at a time. The answer only appears at the very top.</p>
+        <div class="actions">
+          <button class="btn hero-go" id="home-continue" type="button">Start practising</button>
+          <button class="btn secondary" data-goto="quiz" type="button">Take a quick quiz</button>
+        </div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 220 260" aria-hidden="true">
+        <g stroke-linecap="round" fill="none">
+          <line x1="60" y1="20" x2="60" y2="245" class="rail"/>
+          <line x1="160" y1="20" x2="160" y2="245" class="rail"/>
+          <line x1="60" y1="200" x2="160" y2="200" class="rung1"/>
+          <line x1="60" y1="150" x2="160" y2="150" class="rung2"/>
+          <line x1="60" y1="100" x2="160" y2="100" class="rung3"/>
+          <line x1="60" y1="50" x2="160" y2="50" class="rung4"/>
+        </g>
+        <g class="hero-symbols">
+          <text x="182" y="208">+</text><text x="10" y="160">×</text><text x="186" y="112">π</text><text x="14" y="62">√</text><text x="100" y="250">=</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="home-stats" id="home-stats"></div>
+
+    <div class="home-section">
+      <h3>Choose a strand</h3>
+      <div class="strand-cards" id="strand-cards"></div>
+    </div>
+
+    <div class="card how">
+      <h3>How the hint ladder works</h3>
+      <ol class="how-steps">
+        <li><span class="how-rung r0">1</span><strong>Have a go</strong><span>Try the question on your own first.</span></li>
+        <li><span class="how-rung r1">2</span><strong>Nudge</strong><span>A small reminder of what to think about.</span></li>
+        <li><span class="how-rung r2">3</span><strong>Guiding question</strong><span>A question that points you the right way.</span></li>
+        <li><span class="how-rung r3">4</span><strong>Next step</strong><span>The first step done for you. Can you finish it?</span></li>
+        <li><span class="how-rung r4">5</span><strong>Worked solution</strong><span>Only at the very top, if you really need it.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= PRACTISE ================= -->
+  <section id="view-practise" class="wrap" style="gap:16px" hidden>
+    <div class="toolbar">
+      <div class="crumb">
+        <span class="label" id="crumb-strand"></span>
+        <strong id="crumb-topic"></strong>
+      </div>
+      <div class="seg" id="level-seg" aria-label="Level">
+        <button data-level="foundation" aria-pressed="false">Foundation</button>
+        <button data-level="higher" aria-pressed="false">Higher</button>
+        <button data-level="auto" aria-pressed="true" title="Moves up after 3 correct in a row with 1 hint or fewer, and back down after 2 solutions shown in a row">Auto</button>
+      </div>
+    </div>
+
+    <details class="learn" id="learn">
+      <summary id="learn-title">How does this topic work?</summary>
+      <div class="learn-body" id="learn-body"></div>
+    </details>
+
+    <div class="desk">
+      <div class="card" id="q-card">
+        <div class="qhead">
+          <span class="label" id="q-topic">Question</span>
+          <span class="badge foundation" id="q-level">Foundation</span>
+        </div>
+        <div class="prompt" id="q-prompt" aria-live="polite"></div>
+        <form class="answer-row" id="answer-form" autocomplete="off">
+          <input id="answer" aria-label="Your answer" placeholder="Your answer" spellcheck="false" autocapitalize="off">
+          <button class="btn" type="submit" id="check-btn">Check</button>
+        </form>
+        <p class="type-tip" id="type-tip"></p>
+        <div class="keys" id="keys" aria-label="Maths keys"></div>
+        <div id="feedback" aria-live="polite"></div>
+        <div class="actions">
+          <button class="btn pen" id="hint-btn" type="button">Give me a hint (1 of 3)</button>
+          <button class="btn secondary" id="next-btn" type="button">Skip to a new question</button>
+        </div>
+        <div class="tally" id="tally"></div>
+      </div>
+
+      <aside class="strip" aria-label="Hints">
+        <div class="ladder" id="ladder" aria-hidden="true"></div>
+        <div class="notes" id="notes"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section id="view-quiz" hidden>
+    <div class="card" id="quiz-setup">
+      <h2>Quick quiz</h2>
+      <p class="muted">8 questions with no hints. You can quiz one topic, a whole strand, or everything. Take one before you practise a topic and another one after, then compare the scores on the My progress tab. That shows whether the hints are helping you learn.</p>
+      <div class="controls">
+        <label class="group"><span class="label">Topic</span>
+          <select id="quiz-topic" style="padding:8px;border-radius:8px;border:1.5px solid var(--line);background:var(--card)"></select>
+        </label>
+        <label class="group"><span class="label">Level</span>
+          <select id="quiz-level" style="padding:8px;border-radius:8px;border:1.5px solid var(--line);background:var(--card)">
+            <option value="foundation">Foundation</option>
+            <option value="higher">Higher</option>
+          </select>
+        </label>
+        <label class="group"><span class="label">This quiz is…</span>
+          <select id="quiz-when" style="padding:8px;border-radius:8px;border:1.5px solid var(--line);background:var(--card)">
+            <option value="before">Before practising</option>
+            <option value="after">After practising</option>
+            <option value="later">A week later (memory check)</option>
+            <option value="other">Just for fun</option>
+          </select>
+        </label>
+        <button class="btn" id="quiz-start" type="button">Start quiz</button>
+      </div>
+    </div>
+
+    <div class="card" id="quiz-run" hidden>
+      <div class="qhead">
+        <span class="label" id="quiz-count">Question 1 of 8</span>
+        <span class="badge foundation" id="quiz-badge">Foundation</span>
+      </div>
+      <div class="quiz-progress"><span id="quiz-bar" style="width:0%"></span></div>
+      <div class="prompt" id="quiz-prompt"></div>
+      <form class="answer-row" id="quiz-form" autocomplete="off">
+        <input id="quiz-answer" aria-label="Your answer" placeholder="Your answer" spellcheck="false" autocapitalize="off">
+        <button class="btn" type="submit">Submit</button>
+      </form>
+      <p class="type-tip" id="quiz-tip"></p>
+      <div class="keys" id="quiz-keys"></div>
+      <div id="quiz-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="card" id="quiz-done" hidden>
+      <span class="label">Quiz finished</span>
+      <div class="big-score" id="quiz-score"></div>
+      <p id="quiz-summary" class="muted"></p>
+      <div class="table-wrap"><table id="quiz-review"></table></div>
+      <div class="actions">
+        <button class="btn" id="quiz-again" type="button">Take another quiz</button>
+        <button class="btn secondary" data-goto="practise" type="button">Go and practise</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROGRESS ================= -->
+  <section id="view-progress" class="wrap" style="gap:16px" hidden>
+    <div class="card">
+      <h2>Practice by topic</h2>
+      <p class="muted">“No hints” counts questions you got right on your own. Look for that number going up over time.</p>
+      <div class="table-wrap"><table id="topic-table"></table></div>
+    </div>
+    <div class="card">
+      <h2>Quiz scores</h2>
+      <p class="muted">Compare your <em>before</em> and <em>after</em> scores for the same topic and level.</p>
+      <div id="compare"></div>
+      <div class="table-wrap"><table id="quiz-table"></table></div>
+      <div class="actions">
+        <button class="btn secondary" id="csv-btn" type="button">Copy results for a spreadsheet</button>
+        <button class="btn secondary" id="reset-btn" type="button">Reset all progress</button>
+      </div>
+      <div id="progress-msg"></div>
+    </div>
+  </section>
+
+  <footer>
+    Typing tips: <code>x^2</code> for x², <code>-</code> for minus, <code>3/4</code> for fractions, and <code>pi</code> for π. Units like cm or £ are optional.
+    Progress is saved in this browser only. Some questions describe shapes in words, so keep paper handy for sketches.
+  </footer>
+  </main>
+  </div>
+</div>
+
+<script src="maths.js"></script>
+<script src="topics/number.js"></script>
+<script src="topics/algebra.js"></script>
+<script src="topics/ratio.js"></script>
+<script src="topics/geometry.js"></script>
+<script src="topics/stats.js"></script>
+<script src="topics/year10.js"></script>
+<script>
+(function () {
+  'use strict';
+  const M = window.MathsEngine;
+  const $ = id => document.getElementById(id);
+  const topicById = id => M.TOPICS.find(t => t.id === id);
+  const strandName = id => M.STRANDS.find(s => s.id === id).name;
+  const isPhone = () => window.matchMedia('(max-width: 760px)').matches;
+
+  // ---------- Saving progress in the browser ----------
+  // ---------- Background ----------
+  // Remembered separately from progress, so resetting progress keeps your background.
+  // (The saved-data names still use the app's old name, so nobody loses their progress after the rename.)
+  const BG_KEY = 'algebra-hint-ladder-background';
+  function setBackground(choice) {
+    const button = document.querySelector('.bg-swatch[data-bg="' + choice + '"]') || document.querySelector('.bg-swatch');
+    document.documentElement.dataset.bg = button.dataset.bg;
+    for (const b of document.querySelectorAll('.bg-swatch')) b.setAttribute('aria-pressed', String(b === button));
+    $('bg-name').textContent = button.title;
+    $('grad-panel').hidden = button.dataset.bg !== 'gradient';
+    if (button.dataset.bg === 'gradient') checkReadable();
+    try { localStorage.setItem(BG_KEY, button.dataset.bg); } catch (e) { /* not remembered, but it still changes */ }
+  }
+  for (const b of document.querySelectorAll('.bg-swatch')) b.addEventListener('click', () => setBackground(b.dataset.bg));
+  let savedBackground = 'wash';
+  try { savedBackground = localStorage.getItem(BG_KEY) || 'wash'; } catch (e) { /* use the default */ }
+  // ----- Custom gradient -----
+  const GRAD_KEY = 'algebra-hint-ladder-gradient';
+  const GRADIENTS = [
+    ['Sunset', '#f97316', '#ec4899', 135], ['Ocean', '#0ea5e9', '#6366f1', 160], ['Forest', '#10b981', '#84cc16', 120],
+    ['Candy', '#f472b6', '#a78bfa', 45], ['Berry', '#be185d', '#4c1d95', 200], ['Aurora', '#22d3ee', '#a3e635', 90]
+  ];
+  let gradient = { c1: GRADIENTS[0][1], c2: GRADIENTS[0][2], angle: GRADIENTS[0][3], strength: 45 };
+  try {
+    const saved = JSON.parse(localStorage.getItem(GRAD_KEY));
+    if (saved && /^#[0-9a-f]{6}$/i.test(saved.c1) && /^#[0-9a-f]{6}$/i.test(saved.c2)) gradient = Object.assign(gradient, saved);
+  } catch (e) { /* use the default gradient */ }
+
+  function luminance(hex) {
+    const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+      .map(c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+  function mixHex(a, b, amountOfB) {
+    const out = [1, 3, 5].map(i => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - amountOfB) + parseInt(b.slice(i, i + 2), 16) * amountOfB));
+    return '#' + out.map(n => n.toString(16).padStart(2, '0')).join('');
+  }
+  // Warn when the page text would be hard to read on this gradient (checks both ends of it)
+  function checkReadable() {
+    const style = getComputedStyle(document.documentElement);
+    const paper = style.getPropertyValue('--paper').trim(), ink = style.getPropertyValue('--ink').trim();
+    if (!/^#[0-9a-f]{6}$/i.test(paper) || !/^#[0-9a-f]{6}$/i.test(ink)) { $('grad-warn').textContent = ''; return; }
+    const veil = 1 - gradient.strength / 100;
+    const worst = Math.min(...[gradient.c1, gradient.c2].map(c => {
+      const bg = luminance(mixHex(c, paper, veil)), fg = luminance(ink);
+      return (Math.max(bg, fg) + 0.05) / (Math.min(bg, fg) + 0.05);
+    }));
+    $('grad-warn').textContent = worst < 4.5 ? 'The text may be hard to read on this gradient. Try lowering the Strength.' : '';
+  }
+
+  function applyGradient(saveIt) {
+    const root = document.documentElement.style;
+    root.setProperty('--g1', gradient.c1);
+    root.setProperty('--g2', gradient.c2);
+    root.setProperty('--g-angle', gradient.angle + 'deg');
+    root.setProperty('--g-veil', (100 - gradient.strength) + '%');
+    $('grad-c1').value = gradient.c1;
+    $('grad-c2').value = gradient.c2;
+    $('grad-angle').value = gradient.angle;
+    $('grad-angle-out').textContent = gradient.angle + '°';
+    $('grad-strength').value = gradient.strength;
+    $('grad-strength-out').textContent = gradient.strength + '%';
+    for (const b of $('grad-presets').children) {
+      const [, c1, c2, angle] = GRADIENTS[b.dataset.index];
+      b.setAttribute('aria-pressed', String(c1 === gradient.c1 && c2 === gradient.c2 && angle === gradient.angle));
+    }
+    checkReadable();
+    if (saveIt) { try { localStorage.setItem(GRAD_KEY, JSON.stringify(gradient)); } catch (e) { /* not remembered, but it still changes */ } }
+  }
+
+  GRADIENTS.forEach(([name, c1, c2, angle], i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'grad-preset';
+    b.dataset.index = i;
+    b.title = name;
+    b.setAttribute('aria-label', name + ' gradient');
+    b.style.background = 'linear-gradient(' + angle + 'deg, ' + c1 + ', ' + c2 + ')';
+    b.addEventListener('click', () => { Object.assign(gradient, { c1, c2, angle }); applyGradient(true); });
+    $('grad-presets').appendChild(b);
+  });
+  $('grad-c1').addEventListener('input', e => { gradient.c1 = e.target.value; applyGradient(true); });
+  $('grad-c2').addEventListener('input', e => { gradient.c2 = e.target.value; applyGradient(true); });
+  $('grad-swap').addEventListener('click', () => { [gradient.c1, gradient.c2] = [gradient.c2, gradient.c1]; applyGradient(true); });
+  $('grad-angle').addEventListener('input', e => { gradient.angle = Number(e.target.value); applyGradient(true); });
+  $('grad-strength').addEventListener('input', e => { gradient.strength = Number(e.target.value); applyGradient(true); });
+  $('grad-random').addEventListener('click', () => {
+    const hue = Math.floor(Math.random() * 360), hue2 = (hue + 40 + Math.floor(Math.random() * 100)) % 360;
+    const hsl = (h) => {
+      const a = 0.75 * Math.min(0.55, 1 - 0.55), f = n => { const k = (n + h / 30) % 12; return Math.round(255 * (0.55 - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)))); };
+      return '#' + [f(0), f(8), f(4)].map(n => n.toString(16).padStart(2, '0')).join('');
+    };
+    gradient.c1 = hsl(hue); gradient.c2 = hsl(hue2); gradient.angle = Math.floor(Math.random() * 72) * 5;
+    applyGradient(true);
+  });
+  applyGradient(false);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(checkReadable, 50));
+
+  setBackground(savedBackground);
+
+  const STORE_KEY = 'algebra-hint-ladder-v1';
+  function blankTopic() {
+    return { attempted: 0, solved: 0, solvedNoHints: 0, hintsUsed: 0, revealed: 0, autoLevel: 'foundation', streak: 0, misses: 0 };
+  }
+  function blankSave() {
+    const topics = {};
+    for (const t of M.TOPICS) topics[t.id] = blankTopic();
+    return { topics, quizzes: [], log: [] };
+  }
+  function load() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORE_KEY));
+      if (saved && saved.topics) {
+        for (const t of M.TOPICS) saved.topics[t.id] = Object.assign(blankTopic(), saved.topics[t.id]);
+        saved.quizzes = saved.quizzes || [];
+        saved.log = saved.log || [];
+        return saved;
+      }
+    } catch (e) { /* storage blocked or empty: start fresh */ }
+    return blankSave();
+  }
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch (e) { /* not saved, but the page still works */ }
+  }
+  let data = load();
+
+  // ---------- What to type for each kind of answer ----------
+  const TYPING = {
+    number: { tip: 'Type a number, like 7, −4 or 2.5. Units are optional.', placeholder: 'e.g. 7' },
+    expression: { tip: 'Type an expression, like 3x + 12. Use ^ for powers: x^2.', placeholder: 'e.g. 3x + 12' },
+    fraction: { tip: 'Type a fraction like 3/4, or a mixed number like 1 1/2.', placeholder: 'e.g. 3/4' },
+    ratio: { tip: 'Type a ratio with colons, like 2 : 3.', placeholder: 'e.g. 2 : 3' },
+    inequality: { tip: 'Type an inequality, like x > 4 or x ≤ −2 (<= works for ≤).', placeholder: 'e.g. x > 4' },
+    pair: { tip: 'Type both values, like x = 3, y = −2.', placeholder: 'e.g. x = 3, y = −2' },
+    standard: { tip: 'Type it like 3.4 × 10^4 (x or * works for ×).', placeholder: 'e.g. 3.4 × 10^4' },
+    primes: { tip: 'Type primes multiplied together, like 2^3 × 3^2.', placeholder: 'e.g. 2^3 × 3' },
+    roots: { tip: 'Type both solutions, like x = 3 or x = −5.', placeholder: 'e.g. x = 3 or x = −5' },
+    surd: { tip: 'Type a surd like 6√2. Use the √ key, or type sqrt.', placeholder: 'e.g. 6√2' }
+  };
+  const KEYS = {
+    number: [['−', '-'], ['.', '.'], ['/', '/'], ['π', 'π']],
+    fraction: [['/', '/'], ['−', '-'], ['space', ' ']],
+    ratio: [[':', ' : ']],
+    inequality: [['x', 'x'], ['<', '<'], ['>', '>'], ['≤', '≤'], ['≥', '≥'], ['−', '-']],
+    pair: [['x =', 'x = '], ['y =', 'y = '], [',', ', '], ['−', '-']],
+    standard: [['× 10^', ' × 10^'], ['−', '-'], ['.', '.']],
+    primes: [['×', ' × '], ['^', '^']],
+    roots: [['x =', 'x = '], ['or', ' or '], ['−', '-'], ['.', '.']],
+    surd: [['√', '√']]
+  };
+  // Letters each algebra topic uses, for the expression keys
+  const LETTERS = { simplify: ['x', 'y'], sequences: ['n'], rearrange: ['y'] };
+
+  function keysFor(question) {
+    if (question.kind !== 'expression') return KEYS[question.kind] || [];
+    const letters = (LETTERS[question.topic] || ['x']).map(l => [l, l]);
+    return letters.concat([['x²', '^2'], ['(', '('], [')', ')'], ['−', '-'], ['+', '+'], ['/', '/']]);
+  }
+
+  function makeKeys(container, input, question) {
+    container.innerHTML = '';
+    for (const [label, text] of keysFor(question)) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.setAttribute('aria-label', 'Type ' + label);
+      b.addEventListener('click', () => {
+        const s = input.selectionStart ?? input.value.length;
+        const e = input.selectionEnd ?? input.value.length;
+        input.value = input.value.slice(0, s) + text + input.value.slice(e);
+        input.focus();
+        input.setSelectionRange(s + text.length, s + text.length);
+      });
+      container.appendChild(b);
+    }
+  }
+
+  function showPrompt(el, question) {
+    el.textContent = question.prompt;
+    el.classList.toggle('long', question.prompt.length > 60);
+  }
+
+  // ---------- Choosing a topic ----------
+  let strand = 'algebra';
+  let yearFilter = 'all';
+  let topic = 'linear';
+  let levelChoice = 'auto';
+  if (data.lastTopic && topicById(data.lastTopic)) { topic = data.lastTopic; strand = topicById(topic).strand; }
+  let q = null;          // the current question
+  let hintsShown = 0;    // 0–3 hints, 4 means the solution is showing
+  let tries = 0;
+  let finished = false;
+  let session = { solved: 0, noHints: 0, streak: 0 };
+
+  function yearRange(t) {
+    const years = t.year.match(/\d+/g).map(Number);
+    return [Math.min(...years), Math.max(...years)];
+  }
+  function inYear(t) {
+    if (yearFilter === 'all') return true;
+    const [lo, hi] = yearRange(t);
+    return lo <= Number(yearFilter) && Number(yearFilter) <= hi;
+  }
+  // ---------- The sidebar menu ----------
+  // Each strand is a heading you can open to see its topics. The current strand starts open.
+  const openStrands = new Set([strand]);
+  const CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+
+  // ---------- Searching the menu ----------
+  // A topic matches if every word typed is the start of a word in its name, example, strand or keywords.
+  // (Matching word starts means "pi" finds circles but not "spinner".)
+  function searchWords() {
+    return $('topic-search').value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  }
+  function wordStart(text, w, from) {
+    let at = text.indexOf(w, from || 0);
+    while (at > 0 && /[a-z0-9]/.test(text[at - 1])) at = text.indexOf(w, at + 1);
+    return at;
+  }
+  function matchesSearch(t, words) {
+    const text = [t.name, t.example, t.keywords, strandName(t.strand)].join(' ').toLowerCase();
+    return words.every(w => wordStart(text, w) >= 0);
+  }
+  // Show a topic name with the typed letters highlighted
+  function highlight(el, name, words) {
+    const lower = name.toLowerCase();
+    const marks = new Array(name.length).fill(false);
+    for (const w of words) {
+      const at = wordStart(lower, w);
+      if (at >= 0) for (let i = at; i < at + w.length; i++) marks[i] = true;
+    }
+    let i = 0;
+    while (i < name.length) {
+      let j = i;
+      while (j < name.length && marks[j] === marks[i]) j++;
+      const piece = name.slice(i, j);
+      if (marks[i]) { const m = document.createElement('mark'); m.textContent = piece; el.appendChild(m); }
+      else el.appendChild(document.createTextNode(piece));
+      i = j;
+    }
+  }
+
+  function renderMenu() {
+    const menu = $('strand-menu');
+    menu.innerHTML = '';
+    const words = searchWords();
+    let found = 0;
+    for (const s of M.STRANDS) {
+      const topics = M.TOPICS.filter(t => t.strand === s.id && inYear(t) && matchesSearch(t, words));
+      if (!topics.length) continue;
+      found += topics.length;
+      // While searching, every strand with a match is shown open
+      const open = words.length > 0 || openStrands.has(s.id);
+      const section = document.createElement('div');
+      section.dataset.strand = s.id;
+
+      const head = document.createElement('button');
+      head.type = 'button';
+      head.className = 'strand-head';
+      head.setAttribute('aria-expanded', String(open));
+      head.innerHTML = CHEVRON + '<span class="dot"></span><span class="sname"></span><span class="count"></span>';
+      head.querySelector('.sname').textContent = s.name;
+      head.querySelector('.count').textContent = topics.length;
+      head.addEventListener('click', () => {
+        if (open) openStrands.delete(s.id); else openStrands.add(s.id);
+        renderMenu();
+      });
+      section.appendChild(head);
+
+      const list = document.createElement('ul');
+      list.className = 'topic-list';
+      list.hidden = !open;
+      for (const t of topics) {
+        const li = document.createElement('li');
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'topic-link';
+        if (t.id === topic) b.setAttribute('aria-current', 'true');
+        b.innerHTML = '<span class="tname"></span><span class="year"></span>';
+        highlight(b.querySelector('.tname'), t.name, words);
+        b.querySelector('.year').textContent = t.year;
+        b.addEventListener('click', () => chooseTopic(t.id));
+        li.appendChild(b);
+        list.appendChild(li);
+      }
+      section.appendChild(list);
+      menu.appendChild(section);
+    }
+    const status = $('search-status');
+    if (!words.length) status.textContent = '';
+    else if (!found) status.textContent = 'No topics match \u201c' + $('topic-search').value.trim() + '\u201d. Try another word' + (yearFilter === 'all' ? '.' : ', or choose All years.');
+    else status.textContent = found + (found === 1 ? ' topic' : ' topics') + ' found. Press Enter to open the first one.';
+  }
+
+  $('topic-search').addEventListener('input', renderMenu);
+  $('topic-search').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const first = $('strand-menu').querySelector('.topic-link');
+      if (first) { first.click(); }
+    } else if (e.key === 'Escape' && e.target.value) {
+      // First Escape clears the search; the next one closes the menu on phones
+      e.stopPropagation();
+      e.target.value = '';
+      renderMenu();
+    }
+  });
+  // Press / anywhere (except while typing) to jump to the search box
+  document.addEventListener('keydown', e => {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    e.preventDefault();
+    if (isPhone()) openMenu();
+    else if (document.documentElement.dataset.side === 'collapsed') setCollapsed(false, true);
+    $('topic-search').focus();
+  });
+
+  function chooseTopic(id) {
+    $('topic-search').value = '';
+    topic = id;
+    strand = topicById(id).strand;
+    openStrands.add(strand);
+    renderMenu();
+    renderLearn();
+    newQuestion();
+    showView('practise');
+    if (isPhone()) { closeMenu(); window.scrollTo({ top: 0 }); }
+  }
+
+  // On phones the sidebar is a drawer
+  function openMenu() {
+    $('sidebar').classList.add('open');
+    $('scrim').hidden = false;
+    $('menu-btn').setAttribute('aria-expanded', 'true');
+    const current = $('sidebar').querySelector('[aria-current="true"]') || $('sidebar').querySelector('.strand-head');
+    if (current) current.focus();
+  }
+  function closeMenu() {
+    if (!$('sidebar').classList.contains('open')) return;
+    $('sidebar').classList.remove('open');
+    $('scrim').hidden = true;
+    $('menu-btn').setAttribute('aria-expanded', 'false');
+    $('menu-btn').focus();
+  }
+  // On computers the sidebar can be hidden completely. The choice is remembered.
+  const SIDE_KEY = 'algebra-hint-ladder-sidebar';
+  function setCollapsed(collapsed, remember) {
+    document.documentElement.dataset.side = collapsed ? 'collapsed' : 'open';
+    if (!isPhone()) $('menu-btn').setAttribute('aria-expanded', String(!collapsed));
+    if (remember) { try { localStorage.setItem(SIDE_KEY, collapsed ? 'collapsed' : 'open'); } catch (e) { /* not remembered, but it still works */ } }
+  }
+  let savedSide = 'open';
+  try { savedSide = localStorage.getItem(SIDE_KEY) || 'open'; } catch (e) { /* use the default */ }
+  setCollapsed(savedSide === 'collapsed', false);
+  $('side-collapse').addEventListener('click', () => { setCollapsed(true, true); $('menu-btn').focus(); });
+  $('menu-btn').addEventListener('click', () => {
+    if (isPhone()) { openMenu(); return; }
+    setCollapsed(false, true);
+    const current = $('sidebar').querySelector('[aria-current="true"]') || $('sidebar').querySelector('.strand-head');
+    if (current) current.focus();
+  });
+  $('side-close').addEventListener('click', closeMenu);
+  $('scrim').addEventListener('click', closeMenu);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  function renderLearn() {
+    const l = topicById(topic).learn;
+    $('learn-title').textContent = l.title;
+    $('learn-body').innerHTML = l.body.map(p => '<p>' + p + '</p>').join('') + '<div class="eg"></div>';
+    $('learn-body').querySelector('.eg').textContent = l.eg;
+  }
+
+  // ---------- Practise ----------
+  function currentLevel() {
+    return levelChoice === 'auto' ? data.topics[topic].autoLevel : levelChoice;
+  }
+
+  function newQuestion() {
+    q = M.generate(topic, currentLevel());
+    hintsShown = 0;
+    tries = 0;
+    finished = false;
+    $('q-topic').textContent = topicById(topic).name;
+    data.lastTopic = topic;
+    save();
+    document.documentElement.dataset.strand = topicById(topic).strand;
+    $('crumb-strand').textContent = strandName(topicById(topic).strand);
+    $('crumb-topic').textContent = topicById(topic).name;
+    const lvl = $('q-level');
+    lvl.textContent = q.level === 'higher' ? 'Higher' : 'Foundation';
+    lvl.className = 'badge ' + q.level;
+    showPrompt($('q-prompt'), q);
+    const typing = TYPING[q.kind];
+    $('answer').value = '';
+    $('answer').disabled = false;
+    $('check-btn').disabled = false;
+    $('answer').placeholder = typing.placeholder;
+    $('type-tip').textContent = typing.tip;
+    makeKeys($('keys'), $('answer'), q);
+    $('feedback').innerHTML = '';
+    $('next-btn').textContent = 'Skip to a new question';
+    renderHints();
+    renderTally();
+  }
+
+  function renderHints() {
+    // Ladder: rungs 1, 2, 3 are hints; the last rung is the worked solution
+    const ladder = $('ladder');
+    ladder.innerHTML = '';
+    for (let i = 1; i <= 4; i++) {
+      if (i > 1) { const bar = document.createElement('span'); bar.className = 'bar'; ladder.appendChild(bar); }
+      const r = document.createElement('span');
+      r.className = 'rung' + (i === 4 ? ' solution' : ' r' + i) + (hintsShown >= i ? ' used' : '');
+      r.textContent = i === 4 ? '✓' : String(i);
+      ladder.appendChild(r);
+    }
+
+    const notes = $('notes');
+    notes.innerHTML = '';
+    if (hintsShown === 0) {
+      const p = document.createElement('p');
+      p.className = 'empty-note';
+      p.textContent = finished
+        ? 'Solved without any hints. Nice!'
+        : 'Have a go first. If you get stuck, ask for a hint and it will appear here.';
+      notes.appendChild(p);
+    }
+    const names = ['Nudge', 'Guiding question', 'Next step'];
+    for (let i = 0; i < Math.min(hintsShown, 3); i++) {
+      const n = document.createElement('div');
+      n.className = 'note n' + (i + 1);
+      n.innerHTML = '<b>Hint ' + (i + 1) + ' · ' + names[i] + '</b>';
+      n.appendChild(document.createTextNode(q.hints[i]));
+      notes.appendChild(n);
+    }
+    if (hintsShown >= 4) {
+      const s = document.createElement('div');
+      s.className = 'solution';
+      s.innerHTML = '<span class="label">Worked solution</span>';
+      q.solution.forEach((line, i) => {
+        const d = document.createElement('div');
+        d.textContent = line;
+        if (i === q.solution.length - 1) d.className = 'final';
+        s.appendChild(d);
+      });
+      notes.appendChild(s);
+    }
+
+    const hb = $('hint-btn');
+    hb.hidden = finished;
+    if (hintsShown < 3) hb.textContent = 'Give me a hint (' + (hintsShown + 1) + ' of 3)';
+    else hb.textContent = 'Show the worked solution';
+  }
+
+  function renderTally() {
+    const t = data.topics[topic];
+    $('tally').innerHTML =
+      (session.streak >= 2 ? '<span class="streak">' + session.streak + ' in a row!</span>' : '') +
+      '<span>This session: <strong>' + session.solved + '</strong> solved, <strong>' + session.noHints + '</strong> with no hints</span>' +
+      '<span>All time on this topic: <strong>' + t.solved + '</strong> solved</span>' +
+      (levelChoice === 'auto' ? '<span>Auto level: <strong>' + (t.autoLevel === 'higher' ? 'Higher' : 'Foundation') + '</strong></span>' : '');
+  }
+
+  // A short burst of confetti in the strand colours when you get one right
+  function celebrate() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const canvas = $('confetti');
+    const ctx = canvas.getContext('2d');
+    const ratio = window.devicePixelRatio || 1;
+    canvas.width = innerWidth * ratio; canvas.height = innerHeight * ratio;
+    ctx.scale(ratio, ratio);
+    const style = getComputedStyle(document.documentElement);
+    const colours = ['--number', '--algebra', '--ratio', '--geometry', '--stats', '--sun'].map(c => style.getPropertyValue(c).trim());
+    const from = $('feedback').getBoundingClientRect();
+    const pieces = Array.from({ length: 70 }, () => ({
+      x: from.left + from.width / 2, y: from.top,
+      vx: (Math.random() - 0.5) * 9, vy: -Math.random() * 9 - 3,
+      size: 5 + Math.random() * 5, spin: Math.random() * 6, colour: colours[Math.floor(Math.random() * colours.length)]
+    }));
+    const start = performance.now();
+    function frame(now) {
+      const t = (now - start) / 1000;
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (const p of pieces) {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.3; p.vx *= 0.99;
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.spin * t);
+        ctx.globalAlpha = Math.max(0, 1 - t / 1.4);
+        ctx.fillStyle = p.colour;
+        ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        ctx.restore();
+      }
+      if (t < 1.4) requestAnimationFrame(frame); else ctx.clearRect(0, 0, innerWidth, innerHeight);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function showFeedback(el, status, message) {
+    const marks = { correct: '✓', wrong: '✗', almost: '~', invalid: '?' };
+    el.innerHTML = '';
+    const box = document.createElement('div');
+    box.className = 'feedback ' + status;
+    const mark = document.createElement('span');
+    mark.className = 'mark';
+    mark.textContent = marks[status];
+    const text = document.createElement('span');
+    text.textContent = message;
+    box.append(mark, text);
+    el.appendChild(box);
+  }
+
+  function logQuestion(solved) {
+    data.log.push({ time: new Date().toISOString(), topic, level: q.level, hints: Math.min(hintsShown, 3), solution: hintsShown >= 4, tries, solved });
+    if (data.log.length > 1000) data.log.shift();
+  }
+
+  // Auto level: up after 3 good answers in a row, down after 2 solutions shown in a row
+  function updateAutoLevel(goodAnswer, gaveUp) {
+    const t = data.topics[topic];
+    let message = '';
+    if (goodAnswer) { t.streak++; t.misses = 0; }
+    else if (gaveUp) { t.misses++; t.streak = 0; }
+    else { t.streak = 0; }
+    if (levelChoice !== 'auto') return '';
+    if (t.streak >= 3 && t.autoLevel === 'foundation') {
+      t.autoLevel = 'higher'; t.streak = 0;
+      message = 'Three in a row! Moving you up to Higher questions.';
+    } else if (t.misses >= 2 && t.autoLevel === 'higher') {
+      t.autoLevel = 'foundation'; t.misses = 0;
+      message = 'Let’s go back to Foundation for a bit to build up confidence.';
+    }
+    return message;
+  }
+
+  $('answer-form').addEventListener('submit', e => {
+    e.preventDefault();
+    if (finished || !$('answer').value.trim()) return;
+    const r = q.check($('answer').value);
+    if (r.status !== 'invalid') tries++;
+    if (r.status === 'correct') {
+      finished = true;
+      const t = data.topics[topic];
+      t.attempted++; t.solved++; t.hintsUsed += hintsShown;
+      session.solved++;
+      session.streak++;
+      celebrate();
+      let praise = r.message;
+      if (hintsShown === 0) { t.solvedNoHints++; session.noHints++; praise = tries === 1 ? r.message.replace('Correct!', 'Correct, first time with no hints!') : r.message.replace('Correct!', 'Correct, and with no hints!'); }
+      else praise = r.message + ' You used ' + hintsShown + (hintsShown === 1 ? ' hint.' : ' hints.');
+      const levelMsg = updateAutoLevel(hintsShown <= 1, false);
+      logQuestion(true);
+      save();
+      showFeedback($('feedback'), 'correct', praise + (levelMsg ? ' ' + levelMsg : ''));
+      $('answer').disabled = true;
+      $('check-btn').disabled = true;
+      $('next-btn').textContent = 'Next question →';
+      $('next-btn').focus();
+      renderHints();
+      renderTally();
+    } else {
+      let msg = r.message;
+      if (r.status === 'wrong' && tries >= 2 && hintsShown < 3) msg += ' A hint might help.';
+      showFeedback($('feedback'), r.status, msg);
+    }
+  });
+
+  $('hint-btn').addEventListener('click', () => {
+    if (finished) return;
+    hintsShown++;
+    if (hintsShown >= 4) {
+      // The student has seen the full answer, so this question counts as not solved
+      finished = true;
+      const t = data.topics[topic];
+      t.attempted++; t.revealed++; t.hintsUsed += 3;
+      session.streak = 0;
+      const levelMsg = updateAutoLevel(false, true);
+      logQuestion(false);
+      save();
+      showFeedback($('feedback'), 'invalid', 'Here’s how it works. Read through each step, then try a similar question.' + (levelMsg ? ' ' + levelMsg : ''));
+      $('answer').disabled = true;
+      $('check-btn').disabled = true;
+      $('next-btn').textContent = 'Try a similar question →';
+    }
+    renderHints();
+    // On a phone the hints sit below the question, so bring the new one into view
+    const latest = $('notes').lastElementChild;
+    if (latest && latest.scrollIntoView) latest.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+
+  $('next-btn').addEventListener('click', () => {
+    if (!finished && (tries > 0 || hintsShown > 0)) {
+      // Skipping after trying still counts as an attempt
+      const t = data.topics[topic];
+      t.attempted++; t.hintsUsed += hintsShown;
+      session.streak = 0;
+      updateAutoLevel(false, false);
+      logQuestion(false);
+      save();
+    }
+    newQuestion();
+    $('answer').focus();
+  });
+
+  $('level-seg').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    levelChoice = b.dataset.level;
+    for (const x of $('level-seg').querySelectorAll('button')) x.setAttribute('aria-pressed', String(x === b));
+    newQuestion();
+  });
+
+  $('year-seg').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    yearFilter = b.dataset.year;
+    for (const x of $('year-seg').querySelectorAll('button')) x.setAttribute('aria-pressed', String(x === b));
+    if (!inYear(topicById(topic))) {
+      const first = M.TOPICS.find(t => t.strand === strand && inYear(t)) || M.TOPICS.find(inYear);
+      topic = first.id; strand = first.strand; openStrands.add(strand);
+      renderLearn(); newQuestion();
+    }
+    renderMenu();
+  });
+
+  // ---------- Quiz ----------
+  const QUIZ_LENGTH = 8;
+  let quiz = null;
+
+  function quizTopicName(id) {
+    if (id === 'mixed-all' || id === 'mixed') return 'Mixed (everything)';
+    if (id.startsWith('mixed-')) return 'Mixed ' + strandName(id.slice(6));
+    const t = topicById(id);
+    return t ? t.name : id;
+  }
+
+  function quizPool(id) {
+    if (id === 'mixed-all') return M.TOPICS.map(t => t.id);
+    if (id.startsWith('mixed-')) return M.TOPICS.filter(t => t.strand === id.slice(6)).map(t => t.id);
+    return [id];
+  }
+
+  function fillQuizTopics() {
+    let html = '<option value="mixed-all">Mixed: everything</option>';
+    for (const s of M.STRANDS) {
+      html += '<optgroup label="' + s.name + '"><option value="mixed-' + s.id + '">Mixed ' + s.name + '</option>';
+      for (const t of M.TOPICS.filter(x => x.strand === s.id)) html += '<option value="' + t.id + '">' + t.name + ' (' + t.year + ')</option>';
+      html += '</optgroup>';
+    }
+    $('quiz-topic').innerHTML = html;
+  }
+
+  function startQuiz() {
+    const topicId = $('quiz-topic').value;
+    const level = $('quiz-level').value;
+    // Shuffle the topics and go round them, so a mixed quiz covers as many as possible
+    const pool = quizPool(topicId).sort(() => Math.random() - 0.5);
+    const items = [];
+    for (let i = 0; i < QUIZ_LENGTH; i++) items.push({ q: M.generate(pool[i % pool.length], level), given: '', correct: false });
+    quiz = { topic: topicId, level, when: $('quiz-when').value, items, index: 0, started: Date.now() };
+    $('quiz-setup').hidden = true;
+    $('quiz-done').hidden = true;
+    $('quiz-run').hidden = false;
+    showQuizQuestion();
+  }
+
+  function showQuizQuestion() {
+    const item = quiz.items[quiz.index];
+    document.documentElement.dataset.strand = topicById(item.q.topic).strand;
+    $('quiz-count').textContent = 'Question ' + (quiz.index + 1) + ' of ' + QUIZ_LENGTH + ' · ' + topicById(item.q.topic).name;
+    $('quiz-badge').textContent = quiz.level === 'higher' ? 'Higher' : 'Foundation';
+    $('quiz-badge').className = 'badge ' + quiz.level;
+    $('quiz-bar').style.width = (quiz.index / QUIZ_LENGTH * 100) + '%';
+    showPrompt($('quiz-prompt'), item.q);
+    $('quiz-answer').value = '';
+    $('quiz-answer').placeholder = TYPING[item.q.kind].placeholder;
+    $('quiz-tip').textContent = TYPING[item.q.kind].tip;
+    makeKeys($('quiz-keys'), $('quiz-answer'), item.q);
+    $('quiz-feedback').innerHTML = '';
+    $('quiz-answer').focus();
+  }
+
+  $('quiz-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const input = $('quiz-answer').value;
+    if (!input.trim()) return;
+    const item = quiz.items[quiz.index];
+    const r = item.q.check(input);
+    if (r.status === 'invalid') { showFeedback($('quiz-feedback'), 'invalid', r.message); return; }
+    item.given = input;
+    item.correct = r.status === 'correct';
+    quiz.index++;
+    if (quiz.index < QUIZ_LENGTH) showQuizQuestion();
+    else finishQuiz();
+  });
+
+  function finishQuiz() {
+    const score = quiz.items.filter(i => i.correct).length;
+    const seconds = Math.round((Date.now() - quiz.started) / 1000);
+    data.quizzes.push({ time: new Date().toISOString(), topic: quiz.topic, level: quiz.level, when: quiz.when, score, total: QUIZ_LENGTH, seconds });
+    save();
+    $('quiz-run').hidden = true;
+    $('quiz-done').hidden = false;
+    $('quiz-score').textContent = score + ' / ' + QUIZ_LENGTH;
+    $('quiz-summary').textContent = quizTopicName(quiz.topic) + ', ' + (quiz.level === 'higher' ? 'Higher' : 'Foundation') + ', in ' + Math.floor(seconds / 60) + ' min ' + (seconds % 60) + ' s. Saved to My progress.';
+    const rows = quiz.items.map((it, i) =>
+      '<tr><td class="num">' + (i + 1) + '</td><td class="maths">' + esc(it.q.prompt) + '</td><td class="maths">' + esc(it.given) +
+      '</td><td class="maths">' + esc(it.q.answer) + '</td><td class="' + (it.correct ? 'ok">✓' : 'no">✗') + '</td></tr>').join('');
+    $('quiz-review').innerHTML = '<thead><tr><th class="num">#</th><th>Question</th><th>You wrote</th><th>Answer</th><th></th></tr></thead><tbody>' + rows + '</tbody>';
+  }
+
+  $('quiz-start').addEventListener('click', startQuiz);
+  $('quiz-again').addEventListener('click', () => { $('quiz-done').hidden = true; $('quiz-setup').hidden = false; });
+
+  // ---------- Progress ----------
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  }
+
+  const WHEN = { before: 'Before', after: 'After', later: 'Week later', other: 'For fun' };
+
+  function renderProgress() {
+    let rows = '';
+    for (const s of M.STRANDS) {
+      rows += '<tr class="strand-row" data-strand="' + s.id + '"><td colspan="7">' + s.name + '</td></tr>';
+      for (const t of M.TOPICS.filter(x => x.strand === s.id)) {
+        const st = data.topics[t.id];
+        const avg = st.attempted ? (st.hintsUsed / st.attempted).toFixed(1) : '–';
+        rows += '<tr><td>' + t.name + ' <span class="muted">' + t.year + '</span></td><td class="num">' + st.attempted + '</td><td class="num">' + st.solved + '</td><td class="num">' + st.solvedNoHints +
+          '</td><td class="num">' + avg + '</td><td class="num">' + st.revealed + '</td><td>' + (st.autoLevel === 'higher' ? 'Higher' : 'Foundation') + '</td></tr>';
+      }
+    }
+    $('topic-table').innerHTML = '<thead><tr><th>Topic</th><th class="num">Tried</th><th class="num">Solved</th><th class="num">No hints</th><th class="num">Hints per question</th><th class="num">Solutions shown</th><th>Auto level</th></tr></thead><tbody>' + rows + '</tbody>';
+
+    if (!data.quizzes.length) {
+      $('quiz-table').innerHTML = '<tbody><tr><td class="muted">No quizzes yet. Take a “before practising” quiz to get your starting score.</td></tr></tbody>';
+    } else {
+      const qrows = data.quizzes.slice().reverse().map(z =>
+        '<tr><td>' + new Date(z.time).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }) + '</td><td>' + esc(quizTopicName(z.topic)) + '</td><td>' + (z.level === 'higher' ? 'Higher' : 'Foundation') +
+        '</td><td>' + (WHEN[z.when] || '') + '</td><td class="num">' + z.score + ' / ' + z.total + '</td><td class="num">' + Math.round(z.seconds / 60 * 10) / 10 + ' min</td></tr>').join('');
+      $('quiz-table').innerHTML = '<thead><tr><th>Date</th><th>Topic</th><th>Level</th><th>When</th><th class="num">Score</th><th class="num">Time</th></tr></thead><tbody>' + qrows + '</tbody>';
+    }
+
+    // Before vs after comparison for each topic and level
+    const groups = {};
+    for (const z of data.quizzes) {
+      const key = z.topic + '|' + z.level;
+      groups[key] = groups[key] || { before: [], after: [], later: [] };
+      if (groups[key][z.when]) groups[key][z.when].push(z.score / z.total);
+    }
+    const avg = list => list.reduce((a, b) => a + b, 0) / list.length;
+    const lines = [];
+    for (const key in groups) {
+      const g = groups[key];
+      if (!g.before.length || !g.after.length) continue;
+      const [tid, lvl] = key.split('|');
+      const b = Math.round(avg(g.before) * 100), a = Math.round(avg(g.after) * 100);
+      const diff = a - b;
+      lines.push('<p><strong>' + esc(quizTopicName(tid)) + ' (' + (lvl === 'higher' ? 'Higher' : 'Foundation') + ')</strong>: before ' + b + '%, after ' + a + '%, <span class="' + (diff > 0 ? 'ok' : diff < 0 ? 'no' : '') + '">' + (diff > 0 ? '+' : '') + diff + ' points</span>' +
+        (g.later.length ? ', a week later ' + Math.round(avg(g.later) * 100) + '%' : '') + '</p>');
+    }
+    $('compare').innerHTML = lines.join('') || '<p class="muted">Once you have a “before” and an “after” quiz on the same topic and level, the comparison shows up here.</p>';
+    $('progress-msg').innerHTML = '';
+  }
+
+  function csv() {
+    const out = ['type,date,topic,level,when,score,total,seconds,hints,solution_shown,tries,solved'];
+    for (const z of data.quizzes) out.push(['quiz', z.time, z.topic, z.level, z.when, z.score, z.total, z.seconds, '', '', '', ''].join(','));
+    for (const l of data.log) out.push(['practice', l.time, l.topic, l.level, '', '', '', '', l.hints, l.solution, l.tries, l.solved].join(','));
+    return out.join('\n');
+  }
+
+  $('csv-btn').addEventListener('click', () => {
+    const text = csv();
+    const msg = $('progress-msg');
+    const fallback = () => {
+      msg.innerHTML = '<p class="muted">Copying isn’t allowed here. Select all of this text and copy it yourself:</p><textarea class="csv" id="csv-text" readonly></textarea>';
+      const ta = $('csv-text'); ta.value = text; ta.focus(); ta.select();
+    };
+    try {
+      navigator.clipboard.writeText(text).then(() => {
+        msg.innerHTML = '<p class="toast">Copied. Paste it into a spreadsheet, like Google Sheets or Excel.</p>';
+      }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  $('reset-btn').addEventListener('click', () => {
+    const msg = $('progress-msg');
+    msg.innerHTML = '<div class="confirm">Delete all practice and quiz results? This can’t be undone. <button class="btn" id="reset-yes" type="button">Delete everything</button><button class="btn secondary" id="reset-no" type="button">Keep them</button></div>';
+    $('reset-yes').addEventListener('click', () => {
+      data = blankSave(); save(); session = { solved: 0, noHints: 0, streak: 0 };
+      renderProgress(); renderTally();
+      $('progress-msg').innerHTML = '<p class="toast">All progress deleted.</p>';
+    });
+    $('reset-no').addEventListener('click', () => { msg.innerHTML = ''; });
+  });
+
+  // ---------- Home page ----------
+  const STRAND_SYMBOLS = { number: '123', algebra: 'x²', ratio: '2:3', geometry: '△', stats: '½' };
+
+  function renderHome() {
+    $('topic-count').textContent = M.TOPICS.length;
+    // Until you've done a question, invite you to start; after that, take you back to where you were
+    $('home-continue').textContent = data.log.length ? 'Continue: ' + topicById(topic).name + ' →' : 'Start practising →';
+
+    // Your numbers so far (hidden until you've practised something)
+    const all = Object.values(data.topics);
+    const solved = all.reduce((n, t) => n + t.solved, 0);
+    const noHints = all.reduce((n, t) => n + t.solvedNoHints, 0);
+    const practised = M.TOPICS.filter(t => data.topics[t.id].solved > 0).length;
+    $('home-stats').innerHTML = solved === 0 && !data.quizzes.length ? '' : [
+      [solved, 'questions solved'], [noHints, 'solved with no hints'],
+      [practised + '/' + M.TOPICS.length, 'topics practised'], [data.quizzes.length, data.quizzes.length === 1 ? 'quiz taken' : 'quizzes taken']
+    ].map(([n, label]) => '<div class="stat"><b>' + n + '</b><span>' + label + '</span></div>').join('');
+
+    // One card per strand
+    const box = $('strand-cards');
+    box.innerHTML = '';
+    for (const s of M.STRANDS) {
+      const topics = M.TOPICS.filter(t => t.strand === s.id);
+      const done = topics.filter(t => data.topics[t.id].solved > 0).length;
+      const years = topics.flatMap(t => yearRange(t));
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'strand-card';
+      card.dataset.strand = s.id;
+      card.innerHTML = '<span class="sym"></span><strong></strong><span class="meta"></span><div class="meter"><span></span></div><span class="meta progress-text"></span>';
+      card.querySelector('.sym').textContent = STRAND_SYMBOLS[s.id];
+      card.querySelector('strong').textContent = s.name;
+      card.querySelector('.meta').textContent = topics.length + ' topics · Y' + Math.min(...years) + '\u2013' + Math.max(...years);
+      card.querySelector('.meter span').style.width = Math.round(done / topics.length * 100) + '%';
+      card.querySelector('.progress-text').textContent = done + ' of ' + topics.length + ' practised';
+      // Start with the first topic in the strand you haven't practised yet
+      card.addEventListener('click', () => chooseTopic((topics.find(t => !data.topics[t.id].solved) || topics[0]).id));
+      box.appendChild(card);
+    }
+  }
+  $('home-continue').addEventListener('click', () => chooseTopic(topic));
+  $('brand').addEventListener('click', () => showView('home'));
+  $('brand').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showView('home'); } });
+
+  // ---------- Tabs ----------
+  function showView(name) {
+    for (const b of document.querySelectorAll('.tabs button')) b.setAttribute('aria-selected', String(b.dataset.view === name));
+    for (const v of ['home', 'practise', 'quiz', 'progress']) $('view-' + v).hidden = v !== name;
+    if (name === 'progress') renderProgress();
+    if (name === 'home') renderHome();
+    window.scrollTo({ top: 0 });
+  }
+  for (const b of document.querySelectorAll('[data-view]')) b.addEventListener('click', () => showView(b.dataset.view));
+  for (const b of document.querySelectorAll('[data-goto]')) b.addEventListener('click', () => showView(b.dataset.goto));
+
+  // ---------- Start ----------
+  fillQuizTopics();
+  renderMenu();
+  renderLearn();
+  newQuestion();
+
+  // ---------- Installing as an app ----------
+  // Chrome, Edge and Android offer an install prompt; we show our own button for it.
+  // iPhones and iPads don't, so we explain how to add it from the Share menu instead.
+  const installed = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  let installPrompt = null;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    installPrompt = e;
+    $('install').hidden = false;
+    $('install-btn').hidden = false;
+  });
+  $('install-btn').addEventListener('click', () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    installPrompt.userChoice.finally(() => { installPrompt = null; $('install').hidden = true; });
+  });
+  window.addEventListener('appinstalled', () => { $('install').hidden = true; });
+  if (!installed && /iphone|ipad|ipod/i.test(navigator.userAgent)) {
+    $('install').hidden = false;
+    $('install-tip').textContent = 'To install: tap the Share button, then \u201cAdd to Home Screen\u201d.';
+  }
+
+  // The service worker saves the app's files so it works offline.
+  // It only runs when the app is served from a website (http or https), not from a file.
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    navigator.serviceWorker.register('sw.js').catch(() => { /* offline mode unavailable, the app still works */ });
+  }
+
+  // Open on the home page, unless the link asks for a particular tab (like #quiz)
+  function viewFromLink() {
+    const fromLink = (location.hash || '').slice(1);
+    return ['home', 'practise', 'quiz', 'progress'].includes(fromLink) ? fromLink : 'home';
+  }
+  showView(viewFromLink());
+  window.addEventListener('hashchange', () => showView(viewFromLink()));
+})();
+</script>
+</body>
+</html>
