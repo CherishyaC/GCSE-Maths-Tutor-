@@ -487,11 +487,35 @@ tr.strand-row td { background: var(--strand-soft); color: var(--strand); }
   .tabs button { font-size: 0.7rem; }
 }
 
+/* ----- Shown when some of the app's files didn't load ----- */
+.missing { max-width: 640px; margin: 24px auto; padding: 20px 22px; border-radius: var(--radius); border-left: 6px solid var(--bad); background: var(--bad-bg); color: var(--ink); display: grid; gap: 10px; }
+.missing[hidden] { display: none; }
+.missing h2 { color: var(--bad); }
+.missing ul, .missing ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.missing ul li { font-family: ui-monospace, monospace; font-weight: 700; }
+
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
 <canvas id="confetti" aria-hidden="true"></canvas>
+<section class="missing" id="missing-files" role="alert" hidden>
+  <h2>Some of the app&rsquo;s files didn&rsquo;t load</h2>
+  <p>The app can&rsquo;t start without them, which is why the buttons don&rsquo;t work. These files are missing:</p>
+  <ul></ul>
+  <p><strong>How to fix it</strong></p>
+  <ol>
+    <li>Make sure every file of the app was uploaded to the same place as <code>index.html</code>. If the project has folders (like <code>topics</code> and <code>icons</code>), they need to keep exactly those names.</li>
+    <li>Check each file name is spelled exactly as shown above. Downloads sometimes add extra bits, like <code>maths (1).js</code>.</li>
+    <li>Refresh the page with <strong>Ctrl+Shift+R</strong>, or close the tab and open it again.</li>
+  </ol>
+</section>
+<noscript>
+  <section class="missing">
+    <h2>This app needs JavaScript</h2>
+    <p>Open it in a web browser such as Chrome, Safari or Edge. If you opened the file from your Files app or a preview, that won&rsquo;t run it.</p>
+  </section>
+</noscript>
 <div class="wrap">
 
   <header>
@@ -745,16 +769,31 @@ tr.strand-row td { background: var(--strand-soft); color: var(--strand); }
   </div>
 </div>
 
-<script src="maths.js"></script>
-<script src="topics/number.js"></script>
-<script src="topics/algebra.js"></script>
-<script src="topics/ratio.js"></script>
-<script src="topics/geometry.js"></script>
-<script src="topics/stats.js"></script>
-<script src="topics/year10.js"></script>
+<script src="maths.js" onerror="window.__missing=(window.__missing||[]).concat(this.getAttribute('src'))"></script>
+<script src="topics/number.js" onerror="window.__missing=(window.__missing||[]).concat(this.getAttribute('src'))"></script>
+<script src="topics/algebra.js" onerror="window.__missing=(window.__missing||[]).concat(this.getAttribute('src'))"></script>
+<script src="topics/ratio.js" onerror="window.__missing=(window.__missing||[]).concat(this.getAttribute('src'))"></script>
+<script src="topics/geometry.js" onerror="window.__missing=(window.__missing||[]).concat(this.getAttribute('src'))"></script>
+<script src="topics/stats.js" onerror="window.__missing=(window.__missing||[]).concat(this.getAttribute('src'))"></script>
+<script src="topics/year10.js" onerror="window.__missing=(window.__missing||[]).concat(this.getAttribute('src'))"></script>
+<script>
+// If any of the app's files didn't load, say so clearly instead of showing a page whose buttons do nothing.
+(function () {
+  var missing = (window.__missing || []).slice();
+  if (!window.MathsEngine && !missing.length) missing.push('maths.js');
+  if (!missing.length) return;
+  window.__appBroken = true;
+  document.querySelector('.wrap').hidden = true;
+  var box = document.getElementById('missing-files');
+  var list = box.querySelector('ul');
+  missing.forEach(function (name) { var li = document.createElement('li'); li.textContent = name; list.appendChild(li); });
+  box.hidden = false;
+})();
+</script>
 <script>
 (function () {
   'use strict';
+  if (window.__appBroken) return;
   const M = window.MathsEngine;
   const $ = id => document.getElementById(id);
   const topicById = id => M.TOPICS.find(t => t.id === id);
@@ -1659,3 +1698,4 @@ tr.strand-row td { background: var(--strand-soft); color: var(--strand); }
 </script>
 </body>
 </html>
+
